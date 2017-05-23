@@ -1,5 +1,6 @@
 package com.framework.library;
 
+import android.os.Build;
 import android.view.View;
 
 import java.lang.reflect.Field;
@@ -10,6 +11,15 @@ import java.lang.reflect.Field;
  */
 
 public class ClickListenerHelper {
+    public static View.OnClickListener getOnClickListener(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            return getOnClickListenerV14(view);
+        } else {
+            return getOnClickListenerV(view);
+        }
+    }
+
+
     //Used for APIs lower than ICS (API 14)
     private static View.OnClickListener getOnClickListenerV(View view) {
         View.OnClickListener retrievedListener = null;
